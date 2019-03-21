@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1137px;
+            height: 850px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Joinedlayer_1.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        var layer_ESRIWorldTopo_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            opacity: 1.0,
+            attribution: '',
+        });
+        layer_ESRIWorldTopo_0;
+        map.addLayer(layer_ESRIWorldTopo_0);
+        function pop_Joinedlayer_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">Fare Count:' + (feature.properties['tipfare_ra_count'] !== null ? Autolinker.link(String(feature.properties['tipfare_ra_count'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Median Tip/Fare:' + (feature.properties['tipfare_ra_median'] !== null ? Autolinker.link(String(feature.properties['tipfare_ra_median'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Joinedlayer_1_0(feature) {
+            if (feature.properties['tipfare_ra_median'] >= 0.000000 && feature.properties['tipfare_ra_median'] <= 0.000714 ) {
+                return {
+                pane: 'pane_Joinedlayer_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.503)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,249,232,0.503)',
+            }
+            }
+            if (feature.properties['tipfare_ra_median'] >= 0.000714 && feature.properties['tipfare_ra_median'] <= 0.052632 ) {
+                return {
+                pane: 'pane_Joinedlayer_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.503)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,233,197,0.503)',
+            }
+            }
+            if (feature.properties['tipfare_ra_median'] >= 0.052632 && feature.properties['tipfare_ra_median'] <= 0.115385 ) {
+                return {
+                pane: 'pane_Joinedlayer_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.503)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(148,214,193,0.503)',
+            }
+            }
+            if (feature.properties['tipfare_ra_median'] >= 0.115385 && feature.properties['tipfare_ra_median'] <= 0.162434 ) {
+                return {
+                pane: 'pane_Joinedlayer_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.503)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(100,187,199,0.503)',
+            }
+            }
+            if (feature.properties['tipfare_ra_median'] >= 0.162434 && feature.properties['tipfare_ra_median'] <= 0.192308 ) {
+                return {
+                pane: 'pane_Joinedlayer_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.503)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(55,150,196,0.503)',
+            }
+            }
+            if (feature.properties['tipfare_ra_median'] >= 0.192308 && feature.properties['tipfare_ra_median'] <= 0.265455 ) {
+                return {
+                pane: 'pane_Joinedlayer_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.503)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(8,104,172,0.503)',
+            }
+            }
+        }
+        map.createPane('pane_Joinedlayer_1');
+        map.getPane('pane_Joinedlayer_1').style.zIndex = 401;
+        map.getPane('pane_Joinedlayer_1').style['mix-blend-mode'] = 'normal';
+        var layer_Joinedlayer_1 = new L.geoJson(json_Joinedlayer_1, {
+            attribution: '',
+            pane: 'pane_Joinedlayer_1',
+            onEachFeature: pop_Joinedlayer_1,
+            style: style_Joinedlayer_1_0,
+        });
+        bounds_group.addLayer(layer_Joinedlayer_1);
+        map.addLayer(layer_Joinedlayer_1);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Joined layer<br /><table><tr><td style="text-align: center;"><img src="legend/Joinedlayer_1_000000010.png" /></td><td> 0.000 - 0.001 </td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_1_000100531.png" /></td><td> 0.001 - 0.053 </td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_1_005301152.png" /></td><td> 0.053 - 0.115 </td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_1_011501623.png" /></td><td> 0.115 - 0.162 </td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_1_016201924.png" /></td><td> 0.162 - 0.192 </td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_1_019202655.png" /></td><td> 0.192 - 0.265 </td></tr></table>': layer_Joinedlayer_1,"ESRI World Topo": layer_ESRIWorldTopo_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
